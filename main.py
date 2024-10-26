@@ -8,18 +8,27 @@ def clear_terminal():
 
 clear_terminal()
 
+import os
+import subprocess
+
 if os.name == 'nt':
-    os_type = "Windows"
-    executable_path = "windows/thegame.exe"
+    executable_path = os.path.join("windows", "thegame.exe")
 elif os.name == 'posix':
-    os_type = "Unix/Linux/MacOS"
     if os.uname().sysname == 'Darwin':
-        executable_path = "mac/thegame"
+        executable_path = os.path.join("mac", "thegame")
     else:
-        executable_path = "linux/thegame"
+        executable_path = os.path.join("linux", "thegame")
 else:
-    os_type = "Unknown OS"
     executable_path = None
+
+if executable_path and os.path.exists(executable_path):
+    try:
+        subprocess.run(executable_path)
+    except Exception as e:
+        pass
+else:
+    pass
+
 
 
 def c():
