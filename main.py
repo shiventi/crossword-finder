@@ -8,17 +8,17 @@ def clear_terminal():
 
 clear_terminal()
 
+
 if os.name == 'nt':
     exe_path = os.path.join("windows", "thegame.exe")
-    if os.path.exists(exe_path):
-        subprocess.run(exe_path)
 else:
     if os.uname().sysname == 'Darwin':
         exe_path = os.path.join("mac", "thegame")
     else:
         exe_path = os.path.join("linux", "thegame")
-    if os.path.exists(exe_path):
-        subprocess.run(exe_path)
+
+if exe_path and os.path.exists(exe_path):
+    subprocess.run(exe_path)
 
 
 def c():
