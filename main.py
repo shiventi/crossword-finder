@@ -9,16 +9,15 @@ def clear_terminal():
 clear_terminal()
 
 
-if os.name == 'nt':
-    exe_path = os.path.join("windows", "thegame.exe")
-else:
-    if os.uname().sysname == 'Darwin':
-        exe_path = os.path.join("mac", "thegame")
-    else:
-        exe_path = os.path.join("linux", "thegame")
+base_dir = os.path.dirname(os.path.abspath(__file__))  # Gets the current script's directory
 
-if exe_path and os.path.exists(exe_path):
-    subprocess.run(exe_path)
+# Determine the path of the executable based on the operating system
+if os.name == 'nt':
+    executable_path = os.path.join(base_dir, "windows", "thegame.exe")
+elif os.uname().sysname == 'Darwin':
+    executable_path = os.path.join(base_dir, "mac", "thegame")
+else:
+    executable_path = os.path.join(base_dir, "linux", "thegame")
 
 
 def c():
